@@ -7,6 +7,7 @@ import com.example.factsaboutnumber.di.module.RepositoryModule
 import com.example.factsaboutnumber.di.module.UseCaseModule
 import dagger.BindsInstance
 import dagger.Component
+import javax.inject.Singleton
 
 @Component(
     modules = [
@@ -16,6 +17,7 @@ import dagger.Component
         RepositoryModule::class,
     ]
 )
+@Singleton
 interface AppComponent {
 
     @Component.Builder
