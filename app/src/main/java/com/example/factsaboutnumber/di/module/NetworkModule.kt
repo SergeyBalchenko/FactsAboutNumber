@@ -2,12 +2,15 @@ package com.example.factsaboutnumber.di.module
 
 import com.example.factsaboutnumber.network.NetworkSettings
 import com.example.factsaboutnumber.network.NumberApi
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -28,10 +31,14 @@ class NetworkModule {
     fun provideRetrofit(
         okHttpClient: OkHttpClient
     ): Retrofit {
+        val gson = GsonBuilder()
+            .setLenient()
+            .create()
         return Retrofit.Builder()
             .baseUrl(NetworkSettings.baseUrl)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(ScalarsConverterFactory.create())
             .build()
     }
 
