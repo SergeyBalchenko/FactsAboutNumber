@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 interface NumberDao {
 
     @Query("SELECT * FROM NumberInfo")
-    fun getNumberInfo(): Flow<List<NumberInfo>>
+    fun subscribeToNumberInfo(): Flow<List<NumberInfo>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun putNumberInfo(numberInfo: NumberInfo)
