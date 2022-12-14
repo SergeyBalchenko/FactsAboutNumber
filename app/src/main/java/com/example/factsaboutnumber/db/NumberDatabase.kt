@@ -11,7 +11,8 @@ import com.example.factsaboutnumber.db.entities.NumberInfo
     entities =[
         NumberInfo::class
     ],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class NumberDatabase : RoomDatabase() {
 

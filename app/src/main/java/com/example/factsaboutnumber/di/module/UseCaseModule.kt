@@ -1,6 +1,7 @@
 package com.example.factsaboutnumber.di.module
 
 import com.example.factsaboutnumber.repository.NumberRepository
+import com.example.factsaboutnumber.usecase.GetNumberDetailsUseCase
 import com.example.factsaboutnumber.usecase.SearchNumberInfoUseCase
 import com.example.factsaboutnumber.usecase.SubscribeToNumberInfoUseCase
 import dagger.Module
@@ -28,5 +29,13 @@ class UseCaseModule {
         return SubscribeToNumberInfoUseCase(
             numberRepository
         )
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetNumberDetailsUseCase(
+        numberRepository: NumberRepository
+    ): GetNumberDetailsUseCase {
+        return GetNumberDetailsUseCase(numberRepository)
     }
 }

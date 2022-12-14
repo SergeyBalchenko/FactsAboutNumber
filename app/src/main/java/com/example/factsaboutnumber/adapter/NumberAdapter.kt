@@ -4,11 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.factsaboutnumber.R
 import com.example.factsaboutnumber.databinding.RowNumberInfoBinding
 import com.example.factsaboutnumber.db.entities.NumberInfo
-import com.example.factsaboutnumber.screen.chooseNumber.ChooseNumberFragment
-import com.example.factsaboutnumber.screen.infoNumber.InfoNumberFragment
 
 class NumberAdapter(
     private val listener: NumberListener

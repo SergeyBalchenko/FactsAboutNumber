@@ -1,6 +1,5 @@
 package com.example.factsaboutnumber.screen.chooseNumber
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.factsaboutnumber.App
 import com.example.factsaboutnumber.R
 import com.example.factsaboutnumber.adapter.NumberAdapter
@@ -22,8 +24,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-const val KEY_NUMBER = "number"
 
 class ChooseNumberFragment : Fragment() {
 
@@ -58,7 +58,6 @@ class ChooseNumberFragment : Fragment() {
             object : NumberListener {
                 override fun onClick(number: Int) {
                     navigateToNumberDetails(number)
-                    openInfoFragment()
                 }
             }
         )
@@ -91,13 +90,14 @@ class ChooseNumberFragment : Fragment() {
         viewModel = ViewModelProvider(this, factory)[ChooseNumberViewModel::class.java]
     }
 
-    private fun navigateToNumberDetails(number: Int): InfoNumberFragment {
-        val args = Bundle().apply {
-            putInt("number", number)
-        }
-        val fragment = InfoNumberFragment()
-        fragment.arguments = args
-        return fragment
+    private fun navigateToNumberDetails(number: Int) {
+        parentFragmentManager.beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.container,
+                InfoNumberFragment.newInstance(number),
+                InfoNumberFragment.TAG
+            )
+            .commit()
     }
     private fun handleUiEvent(effect: Effect) {
         when (effect) {
@@ -109,16 +109,7 @@ class ChooseNumberFragment : Fragment() {
     private fun handleUiState(list: List<NumberInfo>) {
         adapter.submitList(list)
     }
-    private  fun openInfoFragment(){
-        parentFragmentManager.beginTransaction()
-            .replace(
-                R.id.container,
-                InfoNumberFragment.newInstance(),
-                InfoNumberFragment.TAG
-            )
-            .addToBackStack(TAG)
-            .commit()
-    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

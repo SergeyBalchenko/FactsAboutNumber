@@ -15,8 +15,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.toolbar, ChooseNumberFragment.newInstance(), ChooseNumberFragment.TAG)
             .addToBackStack(null)
+            .add(R.id.container, ChooseNumberFragment.newInstance(), ChooseNumberFragment.TAG)
             .commit()
     }
 
