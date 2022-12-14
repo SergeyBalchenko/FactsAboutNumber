@@ -68,6 +68,7 @@ class ChooseNumberFragment : Fragment() {
         binding.btnFact.setOnClickListener {
             try {
                 val number = Integer.parseInt(binding.edNumber.text.toString())
+                binding.edNumber.text.clear()
                 viewModel.search(number)
             } catch (e: Exception) {
                 Toast.makeText(requireContext(), "Error parse", Toast.LENGTH_SHORT).show()
