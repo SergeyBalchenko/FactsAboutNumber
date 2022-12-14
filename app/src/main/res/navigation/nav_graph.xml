@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/chooseNumberFragment">
+
+    <fragment
+        android:id="@+id/infoNumberFragment"
+        android:name="com.example.factsaboutnumber.screen.infoNumber.InfoNumberFragment"
+        android:label="fragment_info_number"
+        tools:layout="@layout/fragment_info_number" >
+
+        <action
+            android:id="@+id/action_infoNumberFragment_to_chooseNumberFragment"
+            app:destination="@id/chooseNumberFragment" />
+        <argument
+            android:name="number"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooseNumberFragment"
+        android:name="com.example.factsaboutnumber.screen.chooseNumber.ChooseNumberFragment"
+        android:label="ChooseNumberFragment" >
+        <action
+            android:id="@+id/action_chooseNumberFragment_to_infoNumberFragment"
+            app:destination="@id/infoNumberFragment" />
+
+    </fragment>
+</navigation>
